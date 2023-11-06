@@ -78,26 +78,28 @@ class _PlayQuizState extends State<PlayQuiz> {
           color: Colors.black54,
         ),
       ),
-      body: Container(
-        child: Column(
-          
-          children: [
-          questionSnapshot?.docs == null
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: questionSnapshot?.docs.length,
-                  itemBuilder: ((context, index) {
-                    return QuizPlayTile(
-                        questionModel: getQuestionModelFromDataSnapshot(
-                            questionSnapshot!.docs[index]),
-                        index: index);
-                  }))
-        ]),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+            questionSnapshot?.docs == null
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: questionSnapshot?.docs.length,
+                    itemBuilder: ((context, index) {
+                      return QuizPlayTile(
+                          questionModel: getQuestionModelFromDataSnapshot(
+                              questionSnapshot!.docs[index]),
+                          index: index);
+                    }))
+          ]),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.check),
@@ -125,117 +127,115 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text("Q${widget.index + 1} ${widget.questionModel.question}", style: const TextStyle(fontSize: 17, color: Colors.black87),),
-        const SizedBox(
-          height: 12,
-        ),
-        GestureDetector(
-          onTap: () {
-            if (!widget.questionModel.answered) {
-              if (widget.questionModel.option1 ==
-                  widget.questionModel.correctOption) {
-                optionSelected = widget.questionModel.option1;
-                widget.questionModel.answered = true;
-                _correct = _correct + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              } else {
-                optionSelected = widget.questionModel.option1;
-                widget.questionModel.answered = true;
-                _incorrect = _incorrect + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              }
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text("Q${widget.index + 1} ${widget.questionModel.question}", style: const TextStyle(fontSize: 17, color: Colors.black87),),
+      const SizedBox(
+        height: 12,
+      ),
+      GestureDetector(
+        onTap: () {
+          if (!widget.questionModel.answered) {
+            if (widget.questionModel.option1 ==
+                widget.questionModel.correctOption) {
+              optionSelected = widget.questionModel.option1;
+              widget.questionModel.answered = true;
+              _correct = _correct + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
+            } else {
+              optionSelected = widget.questionModel.option1;
+              widget.questionModel.answered = true;
+              _incorrect = _incorrect + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
             }
-          },
-          child: OptionTile(
-              option: "A",
-              description: widget.questionModel.option1,
-              correctAnswer: widget.questionModel.correctOption,
-              optionSelected: optionSelected),
-        ),
-        GestureDetector(
-          onTap: () {
-            if (!widget.questionModel.answered) {
-              if (widget.questionModel.option2 ==
-                  widget.questionModel.correctOption) {
-                optionSelected = widget.questionModel.option2;
-                widget.questionModel.answered = true;
-                _correct = _correct + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              } else {
-                optionSelected = widget.questionModel.option2;
-                widget.questionModel.answered = true;
-                _incorrect = _incorrect + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              }
+          }
+        },
+        child: OptionTile(
+            option: "A",
+            description: widget.questionModel.option1,
+            correctAnswer: widget.questionModel.correctOption,
+            optionSelected: optionSelected),
+      ),
+      GestureDetector(
+        onTap: () {
+          if (!widget.questionModel.answered) {
+            if (widget.questionModel.option2 ==
+                widget.questionModel.correctOption) {
+              optionSelected = widget.questionModel.option2;
+              widget.questionModel.answered = true;
+              _correct = _correct + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
+            } else {
+              optionSelected = widget.questionModel.option2;
+              widget.questionModel.answered = true;
+              _incorrect = _incorrect + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
             }
-          },
-          child: OptionTile(
-              option: "B",
-              description: widget.questionModel.option2,
-              correctAnswer: widget.questionModel.correctOption,
-              optionSelected: optionSelected),
-        ),
-        GestureDetector(
-          onTap: () {
-            if (!widget.questionModel.answered) {
-              if (widget.questionModel.option3 ==
-                  widget.questionModel.correctOption) {
-                optionSelected = widget.questionModel.option3;
-                widget.questionModel.answered = true;
-                _correct = _correct + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              } else {
-                optionSelected = widget.questionModel.option3;
-                widget.questionModel.answered = true;
-                _incorrect = _incorrect + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              }
+          }
+        },
+        child: OptionTile(
+            option: "B",
+            description: widget.questionModel.option2,
+            correctAnswer: widget.questionModel.correctOption,
+            optionSelected: optionSelected),
+      ),
+      GestureDetector(
+        onTap: () {
+          if (!widget.questionModel.answered) {
+            if (widget.questionModel.option3 ==
+                widget.questionModel.correctOption) {
+              optionSelected = widget.questionModel.option3;
+              widget.questionModel.answered = true;
+              _correct = _correct + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
+            } else {
+              optionSelected = widget.questionModel.option3;
+              widget.questionModel.answered = true;
+              _incorrect = _incorrect + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
             }
-          },
-          child: OptionTile(
-              option: "C",
-              description: widget.questionModel.option3,
-              correctAnswer: widget.questionModel.correctOption,
-              optionSelected: optionSelected),
-        ),
-        GestureDetector(
-          onTap: () {
-            if (!widget.questionModel.answered) {
-              if (widget.questionModel.option4 ==
-                  widget.questionModel.correctOption) {
-                optionSelected = widget.questionModel.option4;
-                widget.questionModel.answered = true;
-                _correct = _correct + 1;
-                _notAttempted = _notAttempted - 1;
-                print("${widget.questionModel.correctOption}}");
-                setState(() {});
-              } else {
-                optionSelected = widget.questionModel.option4;
-                widget.questionModel.answered = true;
-                _incorrect = _incorrect + 1;
-                _notAttempted = _notAttempted - 1;
-                setState(() {});
-              }
+          }
+        },
+        child: OptionTile(
+            option: "C",
+            description: widget.questionModel.option3,
+            correctAnswer: widget.questionModel.correctOption,
+            optionSelected: optionSelected),
+      ),
+      GestureDetector(
+        onTap: () {
+          if (!widget.questionModel.answered) {
+            if (widget.questionModel.option4 ==
+                widget.questionModel.correctOption) {
+              optionSelected = widget.questionModel.option4;
+              widget.questionModel.answered = true;
+              _correct = _correct + 1;
+              _notAttempted = _notAttempted - 1;
+              print("${widget.questionModel.correctOption}}");
+              setState(() {});
+            } else {
+              optionSelected = widget.questionModel.option4;
+              widget.questionModel.answered = true;
+              _incorrect = _incorrect + 1;
+              _notAttempted = _notAttempted - 1;
+              setState(() {});
             }
-          },
-          child: OptionTile(
-              option: "D",
-              description: widget.questionModel.option4,
-              correctAnswer: widget.questionModel.correctOption,
-              optionSelected: optionSelected),
-        ),
-        const SizedBox(
-          height: 20,
-        )
-      ]),
-    );
+          }
+        },
+        child: OptionTile(
+            option: "D",
+            description: widget.questionModel.option4,
+            correctAnswer: widget.questionModel.correctOption,
+            optionSelected: optionSelected),
+      ),
+      const SizedBox(
+        height: 20,
+      )
+    ]);
   }
 }

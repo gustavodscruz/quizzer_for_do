@@ -23,7 +23,7 @@ class _ResultsState extends State<Results> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Text("${widget.correct}/${widget.total}}", style: const TextStyle(fontSize: 25),),
+            Text("${widget.correct}/${widget.total}", style: const TextStyle(fontSize: 25),),
             const SizedBox(
               height: 8,
             ),
