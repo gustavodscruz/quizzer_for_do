@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "427499513819",
+    "project_id": "quizzerfordo",
+    "storage_bucket": "quizzerfordo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427499513819:android:e5867290a256a91deba9fe",
+        "android_client_info": {
+          "package_name": "com.gustavodscruz.quizzer_for_do"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6qaVyXcoaYyu4iJDI62zobJrI2grz4bI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
