@@ -87,17 +87,19 @@ class _PlayQuizState extends State<PlayQuiz> {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: questionSnapshot?.docs.length,
-                    itemBuilder: ((context, index) {
-                      return QuizPlayTile(
-                          questionModel: getQuestionModelFromDataSnapshot(
-                              questionSnapshot!.docs[index]),
-                          index: index);
-                    }))
+                : SingleChildScrollView(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: questionSnapshot?.docs.length,
+                      itemBuilder: ((context, index) {
+                        return QuizPlayTile(
+                            questionModel: getQuestionModelFromDataSnapshot(
+                                questionSnapshot!.docs[index]),
+                            index: index);
+                      })),
+                )
           ]),
         ),
       ),
