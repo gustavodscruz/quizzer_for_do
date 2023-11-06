@@ -6,25 +6,32 @@ class DatabaseService {
         .collection("Quiz")
         .doc(quizId)
         .set(quizData)
-        .catchError((onError){
-          print(onError.toString());
-        });
+        .catchError((onError) {
+      print(onError.toString());
+    });
   }
 
-  Future<void> addQuestionData(Map<String, dynamic> questionData, String quizId)async{
-      await FirebaseFirestore.instance
-          .collection("Quiz")
-          .doc(quizId)
-          .collection("QNA")
-          .add(questionData)
-          .catchError((onError){
-            print(onError.toString());
-          });
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> getQuizData(){
-    return FirebaseFirestore.instance
+  Future<void> addQuestionData(
+      Map<String, dynamic> questionData, String quizId) async {
+    await FirebaseFirestore.instance
         .collection("Quiz")
-        .snapshots();
+        .doc(quizId)
+        .collection("QNA")
+        .add(questionData)
+        .catchError((onError) {
+      print(onError.toString());
+    });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getQuizzesData() {
+    return FirebaseFirestore.instance.collection("Quiz").snapshots();
+  }
+
+  getQuizData(String quizId) async {
+    return await FirebaseFirestore.instance
+        .collection("Quiz")
+        .doc(quizId)
+        .collection("QNA")
+        .get();
   }
 }
